@@ -3,11 +3,13 @@
 /**
  * Module dependencies.
  */
-
 import app from '../app';
 import debugLib from 'debug';
 import http from 'http';
-const debug = debugLib('express-template:server');
+
+const debug = debugLib('www:start');
+
+if (process.env.NODE_ENV === 'development') debugLib.enable(process.env.DEBUG);
 
 /**
  * Get port from environment and store in Express.
@@ -85,7 +87,7 @@ function onError(error) {
 function onListening() {
   var addr = server.address();
   var bind = typeof addr === 'string'
-    ? 'pipe ' + addr
-    : 'port ' + addr.port;
-  debug('Listening on ' + bind);
+    ? `pipe ${addr}`
+    : `http://localhost:${addr.port}`;
+  debug(`listening on ${bind}`);
 }

@@ -5,9 +5,9 @@
   "scripts": {
     "start": "npm run prod",
     "build": "npm-run-all clean transpile",
-    "server": "node ./dist-server/bin/www",
-    "dev": "NODE_ENV=development npm-run-all build server",
-    "prod": "NODE_ENV=production npm-run-all build server",
+    "server": "node -r dotenv/config ./dist-server/bin/www",
+    "dev": "cross-env NODE_ENV=development npm-run-all build server",
+    "prod": "cross-env NODE_ENV=production npm-run-all build server",
     "transpile": "babel ./server --out-dir dist-server",
     "clean": "rimraf dist-server",
     "watch:dev": "nodemon",
@@ -47,8 +47,8 @@
     "cookie-parser": "~1.4.4",
     "cors": "^2.8.5",
     "debug": "~2.6.9",
+    "dotenv": "^16.0.3",
     "express": "~4.16.1",
-    "firebase-admin": "^10.2.0",
     "jest-node-exports-resolver": "^1.1.6",
     "morgan": "~1.9.1",
     "nodemon": "^2.0.15",
@@ -56,6 +56,7 @@
     "rimraf": "^3.0.2"
   },
   "devDependencies": {
+    "cross-env": "^7.0.3",
     "jest": "^27.5.1",
     "supertest": "^6.2.2"
   }
